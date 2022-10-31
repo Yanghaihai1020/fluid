@@ -76,8 +76,8 @@ func (r *RuntimeReconciler) ReconcileInternal(ctx cruntime.ReconcileRequestConte
 	// 1.Validate name is prefixed with a number such as "20-hbase".
 	if errs := validation.IsDNS1035Label(runtime.GetName()); len(runtime.GetName()) > 0 && len(errs) > 0 {
 		err := field.Invalid(field.NewPath("metadata").Child("name"), runtime.GetName(), strings.Join(errs, ","))
-		ctx.Log.Error(err, "Failed to setup ddc engine")
-		r.Recorder.Eventf(runtime, corev1.EventTypeWarning, common.ErrorProcessRuntimeReason, "Failed to setup ddc engine due to error %v", err)
+		ctx.Log.Error(err, "Failed to create ddc engine")
+		r.Recorder.Eventf(runtime, corev1.EventTypeWarning, common.ErrorProcessRuntimeReason, "Failed to create ddc engine due to error %v", err)
 		return utils.RequeueIfError(errors.Wrap(err, "Failed to create"))
 	}
 
