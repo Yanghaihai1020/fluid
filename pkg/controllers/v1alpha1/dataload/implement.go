@@ -350,6 +350,7 @@ func (r *DataLoadReconcilerImplement) reconcileFailedDataLoad(ctx cruntime.Recon
 	}
 
 	// 2. check existence of the targetPath in alluxio  dataLoad completely by pod's logs && record event and no requeue.
+	log.Info("DataLoad failed, won't requeue")
 	releaseName := utils.GetDataLoadReleaseName(targetDataload.Name)
 	jobName := utils.GetDataLoadJobName(releaseName)
 	job, err := utils.GetDataLoadJob(r.Client, jobName, ctx.Namespace)
